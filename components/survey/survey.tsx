@@ -4,6 +4,7 @@ import styles from '@styles/survey/Survey.module.scss';
 import { useMemo } from 'react';
 import { CountryPair } from './utils';
 import Progress from './progress/progress';
+import Config from "./config/config";
 
 function Option({
   pair,
@@ -33,12 +34,24 @@ function Option({
 }
 
 export default function Survey() {
-  const { pairs, selectOption, noOfAnswered, progress } = useSurveyData();
+  const {
+    pairs,
+    selectOption,
+    noOfAnswered,
+    progress,
+    changeConfig,
+    noOfPairs,
+  } = useSurveyData();
 
   return (
     <>
+      <Config changeConfig={changeConfig} />
       <Introduction />
-      <Progress progress={progress} noOfAnswered={noOfAnswered} />
+      <Progress
+        progress={progress}
+        noOfAnswered={noOfAnswered}
+        noOfPairs={noOfPairs}
+      />
 
       {pairs.map((pair, index) => (
         <div className={styles.pairOption} key={JSON.stringify(pair.options)}>

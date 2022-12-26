@@ -1,12 +1,14 @@
 import { useCallback, useEffect, useMemo, useState } from 'react';
 import { CountryPair, getCountryPairs } from './utils';
+import _isNill from 'lodash/isNil';
 
-export const useSurveyData = () => {
+export const useSurveyData = (_noOfPairs: number = 50) => {
   const [pairs, setPairs] = useState<CountryPair[]>([]);
+  const [noOfPairs, setNoOfPairs] = useState(_noOfPairs);
 
   useEffect(() => {
-    setPairs(getCountryPairs(50));
-  }, []);
+    setPairs(getCountryPairs(noOfPairs));
+  }, [noOfPairs]);
 
   const selectOption = useCallback((index: number, value: string) => {
     setPairs((data) => {
@@ -14,6 +16,12 @@ export const useSurveyData = () => {
       newData[index]['selected'] = value;
       return newData;
     });
+  }, []);
+
+  const changeConfig = useCallback((_noOfPairs: number | undefined) => {
+    if (!_isNill(_noOfPairs)) {
+      setNoOfPairs(_noOfPairs);
+    }
   }, []);
 
   const noOfAnswered = useMemo(
@@ -26,5 +34,12 @@ export const useSurveyData = () => {
     [noOfAnswered, pairs.length]
   );
 
-  return { pairs, selectOption, noOfAnswered, progress };
+  return {
+    pairs,
+    selectOption,
+    noOfAnswered,
+    progress,
+    changeConfig,
+    noOfPairs,
+  };
 };
