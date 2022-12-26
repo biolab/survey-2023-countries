@@ -1,0 +1,42 @@
+.pairOption {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 20px 0;
+  gap: 20px;
+
+  & + & {
+    padding-top: 20px;
+    border-top: 1px solid rgba(0, 0, 0, 0.15);
+  }
+
+  button {
+    width: 50%;
+    padding: 20px 10px;
+    background: transparent;
+    border: 1px solid rgb(25, 118, 210);
+    color: rgb(25, 118, 210);
+    border-radius: 12px;
+    font-size: 16px;
+    font-weight: 600;
+    transition: all 0.13s;
+
+    &:hover {
+      background: rgba(25, 118, 210, 0.1);
+    }
+
+    &:active {
+      box-shadow: 1px 4px 7px 2px rgb(0 0 0 / 15%);
+    }
+
+    &.selected {
+      background: rgb(25, 118, 210);
+      color: #fff;
+
+      &:hover {
+        background: rgb(17, 100, 183);
+        color: #fff;
+      }
+    }
+  }
+}

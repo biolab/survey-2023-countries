@@ -1,0 +1,25 @@
+.progressWrapper {
+  margin-bottom: 28px;
+}
+
+.progressText {
+  margin-bottom: 6px;
+}
+
+.progressBar {
+  background: rgb(167, 202, 237);
+  width: 100%;
+  height: 8px;
+  border-radius: 4px;
+  position: relative;
+  overflow: hidden;
+
+  .progress {
+    background: rgb(25, 118, 210);
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    transition: width 0.3s;
+  }
+}

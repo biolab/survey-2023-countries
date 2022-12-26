@@ -1,6 +1,8 @@
+import styles from '@styles/survey/Introduction.module.scss';
+
 export default function Introduction() {
   return (
-    <>
+    <div className={styles.introduction}>
       <h1>Moja sanjska država</h1>
 
       <p>
@@ -20,6 +22,6 @@ export default function Introduction() {
         državi iz para bi raje prebivali. Vašo preferenco morate označite za vse
         pare. Vseh parov je 50, na vsaki strani vam bomo prikazali po 10 parov.
       </p>
-    </>
+    </div>
   );
 }

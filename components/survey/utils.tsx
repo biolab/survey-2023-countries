@@ -1,3 +1,6 @@
+import _sampleSize from 'lodash/sampleSize';
+import _random from 'lodash/random';
+
 const countries = [
   'Germany',
   'Slovakia',
@@ -33,10 +36,17 @@ const countries = [
   'Denmark',
 ];
 
-export const getCountryPairs = (noOfPairs: num) => {
-  let result = countries.flatMap((country1, index) =>
-    countries.slice(index + 1).map((country2) => country1 + ' ' + country2)
+export type CountryPair = {
+  options: string[];
+  selected?: string;
+};
+
+export const getCountryPairs = (noOfPairs: number): CountryPair[] => {
+  let allPairs = countries.flatMap((country1, index) =>
+    countries.slice(index + 1).map((country2) => ({
+      options: _random(1) ? [country1, country2] : [country1, country2],
+    }))
   );
 
-  return result;
+  return _sampleSize(allPairs, noOfPairs);
 };
