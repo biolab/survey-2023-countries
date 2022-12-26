@@ -10,10 +10,10 @@ export const useSurveyData = (_noOfPairs: number = 50) => {
     setPairs(getCountryPairs(noOfPairs));
   }, [noOfPairs]);
 
-  const selectOption = useCallback((index: number, value: string) => {
+  const selectOption = useCallback((key: string, value: string) => {
     setPairs((data) => {
       const newData = [...data];
-      newData[index]['selected'] = value;
+      newData.find((pair) => pair.key === key)!['selected'] = value;
       return newData;
     });
   }, []);

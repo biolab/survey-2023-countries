@@ -4,18 +4,16 @@ import styles from '@styles/survey/Survey.module.scss';
 import { useMemo } from 'react';
 import { CountryPair } from './utils';
 import Progress from './progress/progress';
-import Config from "./config/config";
+import Config from './config/config';
 
 function Option({
   pair,
   option,
-  index,
   selectOption,
 }: {
   pair: CountryPair;
   option: number;
-  index: number;
-  selectOption: (index: number, value: string) => void;
+  selectOption: (key: string, value: string) => void;
 }) {
   const isSelected = useMemo(
     () => pair.selected === pair.options[option],
@@ -25,7 +23,7 @@ function Option({
   const country = useMemo(() => pair.options[option], [pair, option]);
   return (
     <button
-      onClick={() => selectOption(index, pair.options[option])}
+      onClick={() => selectOption(pair.key, pair.options[option])}
       className={isSelected ? styles.selected : undefined}
     >
       {country}
@@ -36,11 +34,11 @@ function Option({
 export default function Survey() {
   const {
     pairs,
-    selectOption,
     noOfAnswered,
     progress,
-    changeConfig,
     noOfPairs,
+    selectOption,
+    changeConfig,
   } = useSurveyData();
 
   return (
@@ -53,18 +51,16 @@ export default function Survey() {
         noOfPairs={noOfPairs}
       />
 
-      {pairs.map((pair, index) => (
-        <div className={styles.pairOption} key={JSON.stringify(pair.options)}>
+      {pairs.map((pair) => (
+        <div className={styles.pairOption} key={pair.key}>
           <Option
             pair={pair}
             option={0}
-            index={index}
             selectOption={selectOption}
           />
           <Option
             pair={pair}
             option={1}
-            index={index}
             selectOption={selectOption}
           />
         </div>
