@@ -27,6 +27,7 @@ interface SurveyContextI {
   page: number;
   showMetaDataPage: boolean;
   submitted: boolean;
+  numberOfPairs: number;
   setMetaDataPageDone: (value: boolean) => void;
   submit: () => void;
 }
@@ -43,6 +44,7 @@ export const SurveyContext = React.createContext<SurveyContextI>({
   page: 0,
   showMetaDataPage: false,
   submitted: false,
+  numberOfPairs,
   setMetaDataPageDone: () => null,
 });
 
