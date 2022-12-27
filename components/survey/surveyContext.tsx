@@ -60,7 +60,7 @@ export default function SurveyContextProvider({
 
   useEffect(() => {
     setPairs(getCountryPairs(noOfPairs));
-  }, [noOfPairs]);
+  }, [noOfPairs, pairsPerPage, autoProgress]);
 
   const selectOption = useCallback((key: string, value: string) => {
     setPairs((data) => {
