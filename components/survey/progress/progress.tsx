@@ -9,17 +9,19 @@ export default function Progress({
   progress: number;
   noOfPairs: number;
 }) {
+  const percentage = Number((progress * 100).toFixed(0));
+
   return (
     <div className={styles.progressWrapper}>
       <div className={styles.progressText}>
         Vašo preferenco ste izrazili za {noOfAnswered} od {noOfPairs} parov (
-        {progress} %) držav.
+        {percentage} %) držav.
       </div>
 
       <div className={styles.progressBar}>
         <div
           className={styles.progress}
-          style={{ width: `${progress * 100}%` }}
+          style={{ width: `${percentage}%` }}
         ></div>
       </div>
     </div>

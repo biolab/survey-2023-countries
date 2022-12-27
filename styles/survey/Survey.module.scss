@@ -42,6 +42,47 @@
 }
 
 // //////////
+// Navigation
+// //////////
+.navigation {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  margin-top: 42px;
+  margin-bottom: 20px;
+  gap: 12px;
+
+  &.navigationTop {
+    padding-bottom: 12px;
+    border-bottom: 1px solid;
+    border-bottom: 1px solid;
+  }
+  &.navigationBottom {
+    margin-top: 20px;
+    padding-top: 12px;
+    border-top: 1px solid;
+  }
+
+  button {
+    padding: 8px 16px;
+    color: #fff;
+    background: rgba(25, 118, 210, 0.8);
+    border: 1px solid rgba(25, 118, 210, 0.8);
+    border-radius: 4px;
+    
+    &:disabled {
+      opacity: 0.4;
+      pointer-events: none;
+    } 
+
+    &:hover { 
+      background: rgb(17, 100, 183);
+      color: #fff;
+    }
+  }
+}
+
+// //////////
 // Config
 // //////////
 .config {

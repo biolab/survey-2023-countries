@@ -5,6 +5,7 @@ import { useMemo } from 'react';
 import { CountryPair } from './utils';
 import Progress from './progress/progress';
 import Config from './config/config';
+import Navigation from './navigation/navigation';
 
 function Option({
   pair,
@@ -33,12 +34,16 @@ function Option({
 
 export default function Survey() {
   const {
-    pairs,
+    pagePairs,
     noOfAnswered,
     progress,
     noOfPairs,
+    nextPageEnabled,
+    page,
+    metaDataPage,
     selectOption,
     changeConfig,
+    setPage,
   } = useSurveyData();
 
   return (
@@ -51,20 +56,33 @@ export default function Survey() {
         noOfPairs={noOfPairs}
       />
 
-      {pairs.map((pair) => (
-        <div className={styles.pairOption} key={pair.key}>
-          <Option
-            pair={pair}
-            option={0}
-            selectOption={selectOption}
-          />
-          <Option
-            pair={pair}
-            option={1}
-            selectOption={selectOption}
-          />
+      <Navigation
+        nextPageEnabled={nextPageEnabled}
+        page={page}
+        setPage={setPage}
+      />
+
+      {metaDataPage ? (
+        <div>
+          <p>
+            Hvala za vaše odgovore. Prosimo, da nam poveste še nekaj o sebi.
+          </p>
         </div>
-      ))}
+      ) : (
+        pagePairs.map((pair) => (
+          <div className={styles.pairOption} key={pair.key}>
+            <Option pair={pair} option={0} selectOption={selectOption} />
+            <Option pair={pair} option={1} selectOption={selectOption} />
+          </div>
+        ))
+      )}
+
+      <Navigation
+        nextPageEnabled={nextPageEnabled}
+        page={page}
+        setPage={setPage}
+        bottom
+      />
     </>
   );
 }
