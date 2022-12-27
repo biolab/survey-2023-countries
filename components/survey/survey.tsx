@@ -7,6 +7,7 @@ import Config from './config/config';
 import Navigation from './navigation/navigation';
 import { SurveyContext } from './surveyContext';
 import Demographics from './demographics/demographics';
+import Submitted from "./submitted/submitted";
 
 function Option({
   pair,
@@ -38,9 +39,7 @@ export default function Survey() {
     useContext(SurveyContext);
 
   if (submitted) {
-    return (
-      <div className={styles.showMetaDataPage}>Hvala za vaše odgovore!</div>
-    );
+    return <Submitted />;
   }
   return (
     <>

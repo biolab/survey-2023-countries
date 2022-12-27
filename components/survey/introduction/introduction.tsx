@@ -1,8 +1,8 @@
-import styles from '@styles/survey/Introduction.module.scss';
+import styles from '@styles/survey/Content.module.scss';
 
 export default function Introduction() {
   return (
-    <div className={styles.introduction}>
+    <div className={styles.content}>
       <h1>Moja sanjska država</h1>
 
       <p>

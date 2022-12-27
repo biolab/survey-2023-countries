@@ -1,6 +1,7 @@
 {
-  "numberOfPairs": 7,
-  "pairsPerPage": 4,
+  "numberOfPairs": 50,
+  "pairsPerPage": 10,
+  "numberOfTopResults": 3,
   "countries": [
     "Germany",
     "Slovakia",
