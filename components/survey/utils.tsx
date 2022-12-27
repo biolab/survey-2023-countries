@@ -46,7 +46,7 @@ export const getCountryPairs = (noOfPairs: number): CountryPair[] => {
   let allPairs = countries
     .flatMap((country1, index) =>
       countries.slice(index + 1).map((country2) => ({
-        options: _random(1) ? [country1, country2] : [country1, country2],
+        options: _random(1) ? [country1, country2] : [country2, country1],
       }))
     )
     .map((pair) => ({
