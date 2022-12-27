@@ -5,6 +5,17 @@
   margin: 20px 0;
   gap: 20px;
 
+  &.pairOptionSmall {
+    gap: 10px;
+    margin: 10px 0;
+    justify-content: unset;
+    flex-wrap: wrap;
+    button {
+      width: auto;
+      padding: 12px 8px;
+    }
+  }
+
   & + & {
     padding-top: 20px;
     border-top: 1px solid rgba(0, 0, 0, 0.15);
@@ -41,6 +52,18 @@
   }
 }
 
+.metaDataPage {
+  h2 {
+    font-size: 20px;
+    margin-bottom: 32px;
+  }
+}
+
+.question {
+  font-size: 18px;
+  margin-top: 32px;
+}
+
 // //////////
 // Navigation
 // //////////
@@ -69,13 +92,13 @@
     background: rgba(25, 118, 210, 0.8);
     border: 1px solid rgba(25, 118, 210, 0.8);
     border-radius: 4px;
-    
+
     &:disabled {
       opacity: 0.4;
       pointer-events: none;
-    } 
+    }
 
-    &:hover { 
+    &:hover {
       background: rgb(17, 100, 183);
       color: #fff;
     }

@@ -1,6 +1,7 @@
+import _isNill from 'lodash/isNil';
+import React from 'react';
 import { useCallback, useEffect, useMemo, useReducer, useState } from 'react';
 import { CountryPair, getCountryPairs } from './utils';
-import _isNill from 'lodash/isNil';
 
 function pageReducer(page: number, action: -1 | 1 | 0) {
   switch (action) {
@@ -14,13 +15,46 @@ function pageReducer(page: number, action: -1 | 1 | 0) {
   }
 }
 
-export const useSurveyData = (
-  _noOfPairs: number = 6,
-  _pairsPerPage: number = 5
-) => {
+interface SurveyContextI {
+  pairs: CountryPair[];
+  pagePairs: CountryPair[];
+  selectOption: (key: string, value: string) => void;
+  noOfAnswered: number;
+  progress: number;
+  changeConfig: (
+    _noOfPairs?: number,
+    _pairsPerPage?: number,
+    _autoProgress?: boolean
+  ) => void;
+  noOfPairs: number;
+  setPage: React.Dispatch<0 | 1 | -1>;
+  nextPageEnabled: boolean;
+  page: number;
+  metaDataPage: boolean;
+}
+
+export const SurveyContext = React.createContext<SurveyContextI>({
+  pairs: [],
+  pagePairs: [],
+  selectOption: () => null,
+  noOfAnswered: 0,
+  progress: 0,
+  changeConfig: () => null,
+  noOfPairs: 0,
+  setPage: () => null,
+  nextPageEnabled: false,
+  page: 0,
+  metaDataPage: false,
+});
+
+export default function SurveyContextProvider({
+  children,
+}: {
+  children: React.ReactElement;
+}) {
   const [pairs, setPairs] = useState<CountryPair[]>([]);
-  const [noOfPairs, setNoOfPairs] = useState(_noOfPairs);
-  const [pairsPerPage, setPairsPerPage] = useState(_pairsPerPage);
+  const [noOfPairs, setNoOfPairs] = useState(50);
+  const [pairsPerPage, setPairsPerPage] = useState(10);
   const [page, setPage] = useReducer(pageReducer, 0);
   const [autoProgress, setAutoProgress] = useState(false);
 
@@ -84,17 +118,37 @@ export const useSurveyData = (
     setPage(1);
   }, [autoProgress, nextPageEnabled]);
 
-  return {
-    pairs,
-    pagePairs,
-    selectOption,
-    noOfAnswered,
-    progress,
-    changeConfig,
-    noOfPairs,
-    setPage,
-    nextPageEnabled,
-    page,
-    metaDataPage,
-  };
-};
+  const contextValue = useMemo(
+    () => ({
+      pairs,
+      pagePairs,
+      selectOption,
+      noOfAnswered,
+      progress,
+      changeConfig,
+      noOfPairs,
+      setPage,
+      nextPageEnabled,
+      page,
+      metaDataPage,
+    }),
+    [
+      changeConfig,
+      metaDataPage,
+      nextPageEnabled,
+      noOfAnswered,
+      noOfPairs,
+      page,
+      pagePairs,
+      pairs,
+      progress,
+      selectOption,
+    ]
+  );
+
+  return (
+    <SurveyContext.Provider value={contextValue}>
+      {children}
+    </SurveyContext.Provider>
+  );
+}

@@ -1,14 +1,9 @@
 import styles from '@styles/survey/Progress.module.scss';
+import { useContext } from 'react';
+import { SurveyContext } from '../surveyContext';
 
-export default function Progress({
-  noOfAnswered,
-  progress,
-  noOfPairs,
-}: {
-  noOfAnswered: number;
-  progress: number;
-  noOfPairs: number;
-}) {
+export default function Progress() {
+  const { noOfAnswered, progress, noOfPairs } = useContext(SurveyContext);
   const percentage = Number((progress * 100).toFixed(0));
 
   return (

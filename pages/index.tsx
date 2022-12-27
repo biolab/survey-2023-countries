@@ -1,6 +1,7 @@
 import Head from 'next/head';
 import styles from '@styles/Home.module.scss';
 import Survey from '../components/survey/survey';
+import SurveyContextProvider from '../components/survey/surveyContext';
 
 export default function Home() {
   return (
@@ -12,7 +13,9 @@ export default function Home() {
       </Head>
       <main className={styles.main}>
         <div className={styles.container}>
-          <Survey />
+          <SurveyContextProvider>
+            <Survey />
+          </SurveyContextProvider>
         </div>
       </main>
     </>

@@ -1,16 +1,14 @@
 import styles from '@styles/survey/Survey.module.scss';
+import { useContext } from 'react';
+import { SurveyContext } from '../surveyContext';
 
-export default function Navigation({
-  setPage,
-  nextPageEnabled,
-  page,
-  bottom,
-}: {
-  setPage: (value: -1 | 1 | 0) => void;
-  nextPageEnabled: boolean;
-  page: number;
-  bottom?: boolean;
-}) {
+export default function Navigation({ bottom }: { bottom?: boolean }) {
+  const {
+    nextPageEnabled,
+    page,
+    setPage,
+  } = useContext(SurveyContext);
+
   return (
     <div
       className={
