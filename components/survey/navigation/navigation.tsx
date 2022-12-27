@@ -3,11 +3,8 @@ import { useContext } from 'react';
 import { SurveyContext } from '../surveyContext';
 
 export default function Navigation({ bottom }: { bottom?: boolean }) {
-  const {
-    nextPageEnabled,
-    page,
-    setPage,
-  } = useContext(SurveyContext);
+  const { nextPageEnabled, page, showMetaDataPage, setPage, submit } =
+    useContext(SurveyContext);
 
   return (
     <div
@@ -23,12 +20,22 @@ export default function Navigation({ bottom }: { bottom?: boolean }) {
       >
         Prejšnja stran
       </button>
-      <button
-        disabled={nextPageEnabled ? undefined : true}
-        onClick={() => setPage(1)}
-      >
-        Naslednja stran
-      </button>
+
+      {showMetaDataPage ? (
+        <button
+          disabled={nextPageEnabled ? undefined : true}
+          onClick={() => submit()}
+        >
+          Zaključi
+        </button>
+      ) : (
+        <button
+          disabled={nextPageEnabled ? undefined : true}
+          onClick={() => setPage(1)}
+        >
+          Naslednja stran
+        </button>
+      )}
     </div>
   );
 }

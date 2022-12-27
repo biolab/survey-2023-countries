@@ -6,6 +6,7 @@ import Progress from './progress/progress';
 import Config from './config/config';
 import Navigation from './navigation/navigation';
 import { SurveyContext } from './surveyContext';
+import Demographics from './demographics/demographics';
 
 function Option({
   pair,
@@ -32,75 +33,23 @@ function Option({
   );
 }
 
-function MetaDataPage() {
-  return (
-    <div className={styles.metaDataPage}>
-      <h2>Hvala za vaše odgovore. Prosimo, da nam poveste še nekaj o sebi. (WIP)</h2>
-
-      <div className={styles.question}>Vaš spol</div>
-      <div className={styles.pairOption + ' ' + styles.pairOptionSmall}>
-        {['Ženska', 'Moški', 'Ne želim odgovoriti'].map((age) => (
-          <button key={age} className={false ? styles.selected : undefined}>
-            {age}
-          </button>
-        ))}
-      </div>
-
-      <div className={styles.question}>Koliko ste stari</div>
-      <div className={styles.pairOption + ' ' + styles.pairOptionSmall}>
-        {[
-          'Do 25 let',
-          '26-35 let',
-          '36-45 let',
-          '46-55 let',
-          '56-65 let',
-          'Nad 65 let',
-        ].map((age) => (
-          <button key={age} className={false ? styles.selected : undefined}>
-            {age}
-          </button>
-        ))}
-      </div>
-
-      <div className={styles.question}>V kateri regiji živite?</div>
-      <div className={styles.pairOption + ' ' + styles.pairOptionSmall}>
-        {[
-          'Gorenjska',
-          'Goriška',
-          'Jugovzhodna Slovenija',
-          'Koroška',
-          'Obalno-kraška',
-          'Osrednjeslovenska',
-          'Podravska',
-          'Pomurska',
-          'Posavska',
-          'Primorsko-notranjska',
-          'Savinjska',
-          'Zasavska',
-        ].map((age) => (
-          <button key={age} className={false ? styles.selected : undefined}>
-            {age}
-          </button>
-        ))}
-      </div>
-    </div>
-  );
-}
-
 export default function Survey() {
-  const { pagePairs, metaDataPage, selectOption, changeConfig } =
+  const { pagePairs, showMetaDataPage, selectOption, submitted } =
     useContext(SurveyContext);
 
+  if (submitted) {
+    return (
+      <div className={styles.showMetaDataPage}>Hvala za vaše odgovore!</div>
+    );
+  }
   return (
     <>
-      <Config changeConfig={changeConfig} />
+      <Config />
       <Introduction />
       <Progress />
 
-      <Navigation />
-
-      {metaDataPage ? (
-        <MetaDataPage />
+      {showMetaDataPage ? (
+        <Demographics />
       ) : (
         pagePairs.map((pair) => (
           <div className={styles.pairOption} key={pair.key}>

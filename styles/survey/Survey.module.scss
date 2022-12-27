@@ -52,7 +52,7 @@
   }
 }
 
-.metaDataPage {
+.showMetaDataPage {
   h2 {
     font-size: 20px;
     margin-bottom: 32px;
@@ -117,35 +117,4 @@
   color: #fff;
   margin-bottom: 22px;
   border-radius: 12px;
-
-  > div {
-    display: flex;
-    flex-direction: column;
-    gap: 4px;
-  }
-
-  .checkboxContainer {
-    flex-direction: row;
-    align-items: top;
-    input {
-      width: 20px;
-      height: 20px;
-    }
-  }
-
-  input {
-    padding: 10px;
-    border: 1px solid #fff;
-    border-radius: 4px;
-    background: transparent;
-    color: #fff;
-    font-size: 16px;
-    font-weight: 600;
-    width: 100px;
-  }
-
-  button {
-    padding: 8px 16px;
-    background: #fff;
-  }
 }
