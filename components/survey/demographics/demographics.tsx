@@ -6,22 +6,21 @@ import { SurveyContext } from '../surveyContext';
 const allKeys = demographicQuestions.map((question) => question.key);
 
 export default function Demographics() {
-  const { setMetaDataPageDone } = useContext(SurveyContext);
+  const { setMetaDataPageDone, setDemographics } = useContext(SurveyContext);
 
   const [answers, setAnswers] = useState<{ [key: string]: string }>({});
   const allAnswered = useMemo(
     () => allKeys.every((key) => answers[key] !== undefined),
     [answers]
   );
+
   useEffect(() => {
     if (allAnswered) {
+      setDemographics(answers);
       setMetaDataPageDone(true);
     }
-  }, [allAnswered, setMetaDataPageDone]);
+  }, [allAnswered, answers, setMetaDataPageDone, setDemographics]);
 
-  // if (allAnswered) {
-  //   return <div className={styles.showMetaDataPage}>All answered</div>;
-  // }
   return (
     <div className={styles.showMetaDataPage}>
       <h2>

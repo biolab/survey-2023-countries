@@ -29,6 +29,7 @@ interface SurveyContextI {
   submitted: boolean;
   numberOfPairs: number;
   setMetaDataPageDone: (value: boolean) => void;
+  setDemographics: (value: { [key: string]: string }) => void;
   submit: () => void;
 }
 
@@ -46,6 +47,7 @@ export const SurveyContext = React.createContext<SurveyContextI>({
   submitted: false,
   numberOfPairs,
   setMetaDataPageDone: () => null,
+  setDemographics: () => null,
 });
 
 export default function SurveyContextProvider({
@@ -58,6 +60,9 @@ export default function SurveyContextProvider({
   const [autoProgress, setAutoProgress] = useState(false);
   const [metaDataPageDone, setMetaDataPageDone] = useState(false);
   const [submitted, setSubmitted] = useState(false);
+  const [demographics, setDemographics] = useState<{
+    [key: string]: string;
+  } | null>(null);
 
   useEffect(() => {
     setPairs(getCountryPairs(numberOfPairs));
@@ -71,7 +76,15 @@ export default function SurveyContextProvider({
     });
   }, []);
 
-  const submit = useCallback(() => {
+  const submit = useCallback(async () => {
+    // await fetch('http://ozip.biolab.si/anketa/submit', {
+    //   body: JSON.stringify({
+    //     countryPairs: pairs,
+    //     demographicsData: demographics,
+    //   }),
+    //   method: 'POST',
+    // });
+
     setSubmitted(true);
   }, []);
 
@@ -118,6 +131,7 @@ export default function SurveyContextProvider({
       noOfAnswered,
       progress,
       numberOfPairs,
+      setDemographics,
       setPage,
       setMetaDataPageDone,
       submit,
@@ -135,6 +149,7 @@ export default function SurveyContextProvider({
       pairs,
       progress,
       submitted,
+      setDemographics,
       selectOption,
       setMetaDataPageDone,
       submit,
