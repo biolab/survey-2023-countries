@@ -1,7 +1,8 @@
 {
   "verification": {
     "title": "Vnesite geslo",
-    "continue": "Nadaljuj"
+    "continue": "Nadaljuj",
+    "error": "Napačno geslo. Poskusite znova."
   },
   "introduction": {
     "title": "Moja sanjska država",

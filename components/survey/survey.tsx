@@ -75,7 +75,7 @@ function Verification() {
         />
         <button>{t('verification.continue')}</button>
       </form>
-      {error && <p className={styles.error}>{error}</p>}
+      {error && <p className={styles.error}>{t('verification.error')}</p>}
     </div>
   );
 }
