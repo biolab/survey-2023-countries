@@ -31,6 +31,7 @@
     font-size: 16px;
     font-weight: 600;
     transition: all 0.13s;
+    min-width: 44px;
 
     &:hover {
       background: rgba(25, 118, 210, 0.1);
@@ -117,4 +118,54 @@
   color: #fff;
   margin-bottom: 22px;
   border-radius: 12px;
+}
+
+.verification {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 22px;
+  padding: 20px;
+  margin-bottom: 22px;
+  border-radius: 12px;
+  border: 1px solid rgb(25, 118, 210);
+  h1 {
+    font-size: 32px;
+    margin-bottom: 0;
+  }
+
+  input {
+    width: 100%;
+    padding: 12px 16px;
+    border-radius: 4px;
+    font-size: 16px;
+    background: transparent;
+    border: 1px solid rgb(25, 118, 210);
+  }
+
+  button {
+    padding: 8px 16px;
+    color: #fff;
+    background: rgba(25, 118, 210, 0.8);
+    border: 1px solid rgba(25, 118, 210, 0.8);
+    border-radius: 4px;
+
+    &:disabled {
+      opacity: 0.4;
+      pointer-events: none;
+    }
+
+    &:hover {
+      background: rgb(17, 100, 183);
+      color: #fff;
+    }
+  }
+}
+
+.inputWrapper {
+  display: flex;
+}
+
+.error {
+  color: red;
 }

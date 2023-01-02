@@ -1,13 +1,13 @@
 import Introduction from './introduction/introduction';
 import styles from '@styles/survey/Survey.module.scss';
-import { useContext, useMemo } from 'react';
+import { useCallback, useContext, useMemo, useState } from 'react';
 import { CountryPair } from './utils';
 import Progress from './progress/progress';
 import Config from './config/config';
 import Navigation from './navigation/navigation';
 import { SurveyContext } from './surveyContext';
 import Demographics from './demographics/demographics';
-import Submitted from "./submitted/submitted";
+import Submitted from './submitted/submitted';
 
 function Option({
   pair,
@@ -34,10 +34,55 @@ function Option({
   );
 }
 
+function Verification() {
+  const { setVerified } = useContext(SurveyContext);
+  const [password, setPassword] = useState('');
+  const [error, setError] = useState('');
+
+  const verify = useCallback(async () => {
+    const verifyResponse = await fetch(
+      `http://127.0.0.1:5000/verify?secret=${password}`,
+      { method: 'GET' }
+    );
+
+    if (verifyResponse.status !== 200) {
+      setError('Napačno geslo');
+      return;
+    }
+    localStorage.setItem('survey_pass', password);
+    setError('');
+    setVerified(true);
+  }, [password, setVerified]);
+
+  const submit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    verify();
+  };
+
+  return (
+    <div className={styles.verification}>
+      <h1>Vnesite geslo</h1>
+      <form onSubmit={submit} className={styles.inputWrapper}>
+        <input
+          value={password}
+          onInput={(e: any) => {
+            setPassword(e.target.value);
+          }}
+        />
+        <button>Nadaljuj</button>
+      </form>
+      {error && <p className={styles.error}>{error}</p>}
+    </div>
+  );
+}
+
 export default function Survey() {
-  const { pagePairs, showMetaDataPage, selectOption, submitted } =
+  const { pagePairs, showMetaDataPage, selectOption, submitted, verified } =
     useContext(SurveyContext);
 
+  if (!verified) {
+    return <Verification />;
+  }
   if (submitted) {
     return <Submitted />;
   }

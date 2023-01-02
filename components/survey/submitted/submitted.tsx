@@ -1,7 +1,9 @@
 import styles from '@styles/survey/Content.module.scss';
 import { useContext, useMemo } from 'react';
 import { SurveyContext } from '../surveyContext';
-import { numberOfTopResults } from 'site.config.json';
+import config from 'site.config';
+
+const { numberOfTopResults } = config;
 
 export default function Submitted() {
   const { pairs } = useContext(SurveyContext);

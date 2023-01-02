@@ -1,6 +1,8 @@
 import _sampleSize from 'lodash/sampleSize';
 import _random from 'lodash/random';
-import { countries } from 'site.config.json';
+import config from 'site.config';
+
+const { countries, writeResultsToTestFolder } = config;
 
 export type CountryPair = {
   key: string;
@@ -22,3 +24,7 @@ export const getCountryPairs = (numberOfPairs: number): CountryPair[] => {
 
   return _sampleSize(allPairs, numberOfPairs);
 };
+
+export function isTestEnvironment() {
+  return process.env.NODE_ENV === 'development' || writeResultsToTestFolder;
+}

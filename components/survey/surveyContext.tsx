@@ -1,8 +1,10 @@
 import _isNill from 'lodash/isNil';
 import React from 'react';
 import { useCallback, useEffect, useMemo, useReducer, useState } from 'react';
-import { CountryPair, getCountryPairs } from './utils';
-import { numberOfPairs, pairsPerPage } from 'site.config.json';
+import { CountryPair, getCountryPairs, isTestEnvironment } from './utils';
+import config from 'site.config';
+
+const { numberOfPairs, pairsPerPage } = config;
 
 function pageReducer(page: number, action: -1 | 1 | 0) {
   switch (action) {
@@ -29,8 +31,10 @@ interface SurveyContextI {
   submitted: boolean;
   numberOfPairs: number;
   setMetaDataPageDone: (value: boolean) => void;
+  setVerified: (value: boolean) => void;
   setDemographics: (value: { [key: string]: string }) => void;
   submit: () => void;
+  verified: boolean;
 }
 
 export const SurveyContext = React.createContext<SurveyContextI>({
@@ -41,6 +45,7 @@ export const SurveyContext = React.createContext<SurveyContextI>({
   progress: 0,
   setPage: () => null,
   submit: () => null,
+  setVerified: () => null,
   nextPageEnabled: false,
   page: 0,
   showMetaDataPage: false,
@@ -48,6 +53,7 @@ export const SurveyContext = React.createContext<SurveyContextI>({
   numberOfPairs,
   setMetaDataPageDone: () => null,
   setDemographics: () => null,
+  verified: false,
 });
 
 export default function SurveyContextProvider({
@@ -60,6 +66,7 @@ export default function SurveyContextProvider({
   const [autoProgress, setAutoProgress] = useState(false);
   const [metaDataPageDone, setMetaDataPageDone] = useState(false);
   const [submitted, setSubmitted] = useState(false);
+  const [verified, setVerified] = useState(false);
   const [demographics, setDemographics] = useState<{
     [key: string]: string;
   } | null>(null);
@@ -77,16 +84,24 @@ export default function SurveyContextProvider({
   }, []);
 
   const submit = useCallback(async () => {
-    // await fetch('http://ozip.biolab.si/anketa/submit', {
-    //   body: JSON.stringify({
-    //     countryPairs: pairs,
-    //     demographicsData: demographics,
-    //   }),
-    //   method: 'POST',
-    // });
+    const pass = localStorage.getItem('survey_pass');
+
+    await fetch(
+      `http://127.0.0.1:5000/submit?secret=${pass}${
+        isTestEnvironment() ? '&test_env=true' : ''
+      }`,
+      {
+        body: JSON.stringify({
+          timestamp: new Date().toISOString(),
+          countryPairs: pairs,
+          demographicsData: demographics,
+        }),
+        method: 'POST',
+      }
+    );
 
     setSubmitted(true);
-  }, []);
+  }, [pairs, demographics]);
 
   const pagePairs = useMemo(() => {
     const start = page * pairsPerPage;
@@ -135,6 +150,8 @@ export default function SurveyContextProvider({
       setPage,
       setMetaDataPageDone,
       submit,
+      verified,
+      setVerified,
       submitted,
       nextPageEnabled,
       page,
@@ -149,6 +166,8 @@ export default function SurveyContextProvider({
       pairs,
       progress,
       submitted,
+      verified,
+      setVerified,
       setDemographics,
       selectOption,
       setMetaDataPageDone,

@@ -1,5 +1,5 @@
 import styles from '@styles/survey/Survey.module.scss';
-import config from 'site.config.json';
+import config from 'site.config';
 
 const isDevelopment = process.env.NODE_ENV === 'development';
 
