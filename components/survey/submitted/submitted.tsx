@@ -2,10 +2,12 @@ import styles from '@styles/survey/Content.module.scss';
 import { useContext, useMemo } from 'react';
 import { SurveyContext } from '../surveyContext';
 import config from 'site.config';
+import { useTranslation } from 'next-i18next';
 
 const { numberOfTopResults } = config;
 
 export default function Submitted() {
+  const { t } = useTranslation();
   const { pairs } = useContext(SurveyContext);
 
   const { top, bottom } = useMemo(() => {
@@ -47,10 +49,10 @@ export default function Submitted() {
 
   return (
     <div className={styles.content}>
-      <h1>Hvala za izpolnjeno anketo.</h1>
+      <h1>{t('submitted.title')}</h1>
 
       <div className={styles.results}>
-        <p>Skladno z vašimi odgovori so države, kjer bi najraje živeli:</p>
+        <p>{t('submitted.results_top')}</p>
         {top.map(({ country, index, ratio }) => (
           <div key={country}>
             <strong>{country}</strong> Index: {index} ({ratio})
@@ -59,7 +61,7 @@ export default function Submitted() {
       </div>
 
       <div className={styles.results}>
-        <p>Države, kjer ne bi radi živeli:</p>
+        <p>{t('submitted.results_low')}</p>
         {bottom.map(({ country, index, ratio }) => (
           <div key={country}>
             <strong>{country}</strong> Index: {index} ({ratio})
@@ -68,10 +70,8 @@ export default function Submitted() {
       </div>
 
       <p className={styles.footnote}>
-        Podatke, ki ste nam jih posredovali, bomo statistično obdelali in na
-        podlagi vaših in vseh ostalih odgovorov poiskali socioekonomske,
-        zdravstvene, okoljske in poklicne dejavnike blagostanja, ki najbolj
-        vplivajo na zadovoljstvo Slovencev.
+      {t('submitted.foot_note')}
+        
       </p>
     </div>
   );

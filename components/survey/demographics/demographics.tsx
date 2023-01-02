@@ -1,4 +1,5 @@
 import styles from '@styles/survey/Survey.module.scss';
+import { useTranslation } from 'next-i18next';
 import { useContext, useEffect, useMemo, useState } from 'react';
 import config from 'site.config';
 import { SurveyContext } from '../surveyContext';
@@ -9,6 +10,7 @@ const allKeys = demographicQuestions.map((question) => question.key);
 const arrayOf10 = [...Array(10).keys()].map((n) => (n + 1).toString());
 
 export default function Demographics() {
+  const { t } = useTranslation();
   const { setMetaDataPageDone, setDemographics } = useContext(SurveyContext);
 
   const [answers, setAnswers] = useState<{ [key: string]: string }>({});
@@ -36,14 +38,12 @@ export default function Demographics() {
 
   return (
     <div className={styles.showMetaDataPage}>
-      <h2>
-        Hvala za vaše odgovore. Prosimo, da nam poveste še nekaj o sebi. (WIP)
-      </h2>
+      <h2>{t('demographics.title')}</h2>
 
       {questionsWithOptions.map(({ key, options }) => {
         return (
           <div key={key}>
-            <div className={styles.question}>{key}</div>
+            <div className={styles.question}>{t(`demographics.${key}.q`)}</div>
             <div className={styles.pairOption + ' ' + styles.pairOptionSmall}>
               {options!.map((option) => (
                 <button
@@ -53,7 +53,7 @@ export default function Demographics() {
                     answers[key] === option ? styles.selected : undefined
                   }
                 >
-                  {option}
+                  {t(`demographics.${key}.options.${option}`)}
                 </button>
               ))}
             </div>
@@ -62,13 +62,13 @@ export default function Demographics() {
       })}
 
       <div className={styles.question}>
-        <strong>Označi kako močno se strinjaš s temi trditvami (1-10)</strong>
+        <strong>{t('demographics.agreement_scale_title')}</strong>
       </div>
 
       {questionsWithoutOptions.map(({ key }) => {
         return (
           <div key={key}>
-            <div className={styles.question}>{key}</div>
+            <div className={styles.question}>{t(`demographics.${key}.q`)}</div>
             <div className={styles.pairOption + ' ' + styles.pairOptionSmall}>
               {arrayOf10.map((option) => (
                 <button

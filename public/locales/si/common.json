@@ -1,0 +1,74 @@
+{
+  "verification": {
+    "title": "Vnesite geslo",
+    "continue": "Nadaljuj"
+  },
+  "introduction": {
+    "title": "Moja sanjska država",
+    "p1": "Spoštovani, na Univerzi v Ljubljani želimo ugotoviti, kateri dejavniki so najbolj pomembni za srečno in zadovoljno življenje v Sloveniji. Del te raziskave uporablja rank lestvico nekaterih razvitih držav. In tu nam lahko pomagate vi. V spodnji anketi za pare držav prosimo označite državo iz para, v kateri bi raje živeli. Na koncu ankete vas bomo prosili še za nekaj demografskih podatkov ter predstavili – glede na vaše odgovore – v katerih državah bi vi najraje živeli. Odgovori so anonimni in prostovoljni. Za izpolnjevanje ankete boste porabili okoli pet minut.",
+    "p2": "Začnimo s pari držav. Za spodnje parov držav prosimo označite, v kateri državi iz para bi raje prebivali. Vašo preferenco morate označite za vse pare. Vseh parov je 50, na vsaki strani vam bomo prikazali po 10 parov."
+  },
+  "progress": {
+    "text": "Vašo preferenco ste izrazili za {{noOfAnswered}} od {{numberOfPairs}} parov ({{percentage}} %) držav."
+  },
+  "navigation": {
+    "next": "Naslednja stran",
+    "previous": "Prejšnja stran",
+    "finish": "Zaključi"
+  },
+  "demographics": {
+    "title": "Hvala za vaše odgovore. Prosimo, da nam poveste še nekaj o sebi",
+    "agreement_scale_title": "Označi kako močno se strinjaš s temi trditvami (1-10)",
+
+    "age": {
+      "q": "Koliko ste stari?",
+      "options": {
+        "0-25": "Do 25 let",
+        "26-35": "26-35 let",
+        "36-45": "36-45 let",
+        "46-55": "46-55 let",
+        "56-65": "56-65 let",
+        "65+": "Nad 65 let"
+      }
+    },
+    "region": {
+      "q": "V kateri regiji živite?",
+      "options": {
+        "gorenjska": "Gorenjska",
+        "goriska": "Goriška",
+        "jv_slovenija": "Jugovzhodna Slovenija",
+        "koroska": "Koroška",
+        "obalno_kraska": "Obalno-kraška",
+        "osrednjeslovenska": "Osrednjeslovenska",
+        "podravska": "Podravska",
+        "pomurska": "Pomurska",
+        "posavska": "Posavska",
+        "primorsko_notranjska": "Primorsko-notranjska",
+        "savinjska": "Savinjska",
+        "zasavska": "Zasavska"
+      }
+    },
+    "education": {
+      "q": "Zadnja šola, ki ste jo dokončali",
+      "options": {
+        "II": "Osnovna",
+        "IV": "Dveletna ali triletna poklicna srednja",
+        "V": "Štiriletna ali petletna srednja šola",
+        "VI/1": "Višja šola",
+        "VI/2": "Visoka šola",
+        "VII": "Univerzitetna izobrazba (1. in 2. bolonjska stopnja)",
+        "VIII/1+": "Specializacija, znanstveni magisterij, doktorat"
+      }
+    },
+    "responsibility": {
+      "q": "Posamezniki bi morali prevzeti več odgovornosti za svoje življenje"
+    }
+  },
+
+  "submitted": {
+    "title": "Hvala za izpolnjeno anketo.",
+    "results_top": "Skladno z vašimi odgovori so države, kjer bi najraje živeli:",
+    "results_low": "Države, kjer ne bi radi živeli:",
+    "foot_note": "Podatke, ki ste nam jih posredovali, bomo statistično obdelali in na podlagi vaših in vseh ostalih odgovorov poiskali socioekonomske, zdravstvene, okoljske in poklicne dejavnike blagostanja, ki najbolj vplivajo na zadovoljstvo Slovencev."
+  }
+}

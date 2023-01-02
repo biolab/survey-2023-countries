@@ -8,6 +8,7 @@ import Navigation from './navigation/navigation';
 import { SurveyContext } from './surveyContext';
 import Demographics from './demographics/demographics';
 import Submitted from './submitted/submitted';
+import { useTranslation } from 'next-i18next';
 
 function Option({
   pair,
@@ -37,7 +38,8 @@ function Option({
 function Verification() {
   const { setVerified } = useContext(SurveyContext);
   const [password, setPassword] = useState('');
-  const [error, setError] = useState('');
+  const [error, setError] = useState(false);
+  const { t } = useTranslation();
 
   const verify = useCallback(async () => {
     const verifyResponse = await fetch(
@@ -46,11 +48,13 @@ function Verification() {
     );
 
     if (verifyResponse.status !== 200) {
-      setError('Napačno geslo');
+      setError(true);
       return;
     }
+
     localStorage.setItem('survey_pass', password);
-    setError('');
+
+    setError(false);
     setVerified(true);
   }, [password, setVerified]);
 
@@ -61,7 +65,7 @@ function Verification() {
 
   return (
     <div className={styles.verification}>
-      <h1>Vnesite geslo</h1>
+      <h1>{t('verification.title')}</h1>
       <form onSubmit={submit} className={styles.inputWrapper}>
         <input
           value={password}
@@ -69,7 +73,7 @@ function Verification() {
             setPassword(e.target.value);
           }}
         />
-        <button>Nadaljuj</button>
+        <button>{t('verification.continue')}</button>
       </form>
       {error && <p className={styles.error}>{error}</p>}
     </div>
