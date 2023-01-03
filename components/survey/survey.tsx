@@ -107,7 +107,7 @@ export default function Survey() {
         ))
       )}
 
-      <Navigation bottom />
+      <Navigation />
     </>
   );
 }

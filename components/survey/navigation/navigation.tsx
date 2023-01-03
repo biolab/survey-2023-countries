@@ -3,19 +3,13 @@ import { useTranslation } from 'next-i18next';
 import { useContext } from 'react';
 import { SurveyContext } from '../surveyContext';
 
-export default function Navigation({ bottom }: { bottom?: boolean }) {
+export default function Navigation() {
   const { t } = useTranslation();
   const { nextPageEnabled, page, showMetaDataPage, setPage, submit } =
     useContext(SurveyContext);
 
   return (
-    <div
-      className={
-        styles.navigation +
-        ' ' +
-        (bottom ? styles.navigationBottom : styles.navigationTop)
-      }
-    >
+    <div className={styles.navigation}>
       <button
         disabled={page === 0 ? true : undefined}
         onClick={() => setPage(-1)}
