@@ -43,7 +43,7 @@ function Verification() {
 
   const verify = useCallback(async () => {
     const verifyResponse = await fetch(
-      `http://ozip.biolab.si/anketa/verify?secret=${password}`,
+      `https://ozip.biolab.si/anketa/verify?secret=${password}`,
       { method: 'GET' }
     );
 
