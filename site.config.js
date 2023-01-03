@@ -70,6 +70,7 @@ const config = {
 
     // Question without options will have agreement scale from 1 - 10
     { key: 'responsibility' },
+    { key: 'test' }
   ],
 };
 
