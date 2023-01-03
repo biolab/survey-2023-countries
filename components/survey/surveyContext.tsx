@@ -87,7 +87,7 @@ export default function SurveyContextProvider({
     const pass = localStorage.getItem('survey_pass');
 
     await fetch(
-      `http://127.0.0.1:5000/submit?secret=${pass}${
+      `http://ozip.biolab.si/anketa/submit?secret=${pass}${
         isTestEnvironment() ? '&test_env=true' : ''
       }`,
       {
