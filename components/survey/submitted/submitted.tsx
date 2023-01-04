@@ -55,7 +55,7 @@ export default function Submitted() {
         <p>{t('submitted.results_top')}</p>
         {top.map(({ country, index, ratio }) => (
           <div key={country}>
-            <strong>{country}</strong> Index: {index} ({ratio})
+            <strong>{country}</strong> ({ratio})
           </div>
         ))}
       </div>
@@ -64,7 +64,7 @@ export default function Submitted() {
         <p>{t('submitted.results_low')}</p>
         {bottom.map(({ country, index, ratio }) => (
           <div key={country}>
-            <strong>{country}</strong> Index: {index} ({ratio})
+            <strong>{country}</strong> ({ratio})
           </div>
         ))}
       </div>

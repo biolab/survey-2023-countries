@@ -19,7 +19,7 @@
   },
   "demographics": {
     "title": "Hvala za vaše odgovore. Prosimo, da nam poveste še nekaj o sebi",
-    "agreement_scale_title": "Označi kako močno se strinjaš s temi trditvami (1-10)",
+    "agreement_scale_title": "Označi kako močno se strinjaš s temi trditvami (1-10, kjer je 1=se ne strinjam in 10=se zelo strinjam)",
 
     "age": {
       "q": "Koliko ste stari?",
@@ -62,7 +62,19 @@
       }
     },
     "responsibility": {
-      "q": "Posamezniki bi morali prevzeti več odgovornosti za svoje življenje"
+      "q": "Posamezniki bi morali prevzeti več odgovornosti za svoje življenje."
+    },
+    "employment": {
+      "q": "Brezposelni bi morali sprejeti vsako razpoložljivo delo ali pa izgubiti nadomestilo za brezposelnost."
+    },
+    "competition": {
+      "q": "Tržna konkurenca izboljša državo in življensko okolje."
+    },
+    "gini": {
+      "q": "Dohodki zaposlenih bi morali biti bolj enaki."
+    },
+    "privatization": {
+      "q": "Povečati je treba zasebno lastništvo podjetij in industrije."
     }
   },
 
