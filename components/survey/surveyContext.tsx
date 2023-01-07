@@ -4,7 +4,9 @@ import { useCallback, useEffect, useMemo, useReducer, useState } from 'react';
 import { CountryPair, getCountryPairs, isTestEnvironment } from './utils';
 import config from 'site.config';
 
-const { numberOfPairs, pairsPerPage } = config;
+export const SURVEY_PASS_KEY = 'survey_pass';
+const SURVEY_SUBMITTED_KEY = 'survey_submitted';
+const { numberOfPairs, pairsPerPage, canSubmitSurveyMultipleTimes } = config;
 
 function pageReducer(page: number, action: -1 | 1 | 0) {
   switch (action) {
@@ -35,6 +37,7 @@ interface SurveyContextI {
   setDemographics: (value: { [key: string]: string }) => void;
   submit: () => void;
   verified: boolean;
+  alreadySubmitted: boolean;
 }
 
 export const SurveyContext = React.createContext<SurveyContextI>({
@@ -54,6 +57,7 @@ export const SurveyContext = React.createContext<SurveyContextI>({
   setMetaDataPageDone: () => null,
   setDemographics: () => null,
   verified: false,
+  alreadySubmitted: false,
 });
 
 export default function SurveyContextProvider({
@@ -63,10 +67,10 @@ export default function SurveyContextProvider({
 }) {
   const [pairs, setPairs] = useState<CountryPair[]>([]);
   const [page, setPage] = useReducer(pageReducer, 0);
-  const [autoProgress, setAutoProgress] = useState(false);
   const [metaDataPageDone, setMetaDataPageDone] = useState(false);
   const [submitted, setSubmitted] = useState(false);
   const [verified, setVerified] = useState(false);
+  const [alreadySubmitted, setAlreadySubmitted] = useState(false);
   const [demographics, setDemographics] = useState<{
     [key: string]: string;
   } | null>(null);
@@ -83,8 +87,15 @@ export default function SurveyContextProvider({
     });
   }, []);
 
+  useEffect(() => {
+    if (canSubmitSurveyMultipleTimes) {
+      return;
+    }
+    setAlreadySubmitted(!!localStorage.getItem(SURVEY_SUBMITTED_KEY));
+  }, []);
+
   const submit = useCallback(async () => {
-    const pass = localStorage.getItem('survey_pass');
+    const pass = localStorage.getItem(SURVEY_PASS_KEY);
 
     await fetch(
       `https://ozip.biolab.si/anketa/submit?secret=${pass}${
@@ -100,6 +111,7 @@ export default function SurveyContextProvider({
       }
     );
 
+    localStorage.setItem(SURVEY_SUBMITTED_KEY, 'true');
     setSubmitted(true);
   }, [pairs, demographics]);
 
@@ -130,14 +142,6 @@ export default function SurveyContextProvider({
     return pagePairs.length === 0;
   }, [pagePairs]);
 
-  useEffect(() => {
-    if (!autoProgress || !nextPageEnabled) {
-      return;
-    }
-
-    setPage(1);
-  }, [autoProgress, nextPageEnabled]);
-
   const contextValue = useMemo(
     () => ({
       pairs,
@@ -156,6 +160,7 @@ export default function SurveyContextProvider({
       nextPageEnabled,
       page,
       showMetaDataPage,
+      alreadySubmitted,
     }),
     [
       showMetaDataPage,
@@ -167,6 +172,7 @@ export default function SurveyContextProvider({
       progress,
       submitted,
       verified,
+      alreadySubmitted,
       setVerified,
       setDemographics,
       selectOption,
