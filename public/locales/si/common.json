@@ -19,7 +19,7 @@
   },
   "demographics": {
     "title": "Hvala za vaše odgovore. Prosimo, da nam poveste še nekaj o sebi",
-    "agreement_scale_title": "Označi kako močno se strinjaš s temi trditvami (1-10, kjer je 1=se ne strinjam in 10=se zelo strinjam)",
+    "agreement_scale_title": "Označi kako močno se strinjate s temi trditvami (1-10, kjer je 1=se močno ne strinjam in 10=se zelo strinjam)",
 
     "age": {
       "q": "Koliko ste stari?",
@@ -59,6 +59,17 @@
         "VI/2": "Visoka šola",
         "VII": "Univerzitetna izobrazba (1. in 2. bolonjska stopnja)",
         "VIII/1+": "Specializacija, znanstveni magisterij, doktorat"
+      }
+    },
+    "grades": {
+      "q": "Uspeh na maturi (število doseženih točk)",
+      "options": {
+        "nula": "nisem opravljal mature",
+        "a": "do 15",
+        "b": "od 16 do 20",
+        "c": "od 21 do 25",
+        "d": "od 26 do 30",
+        "e": "31 ali več"
       }
     },
     "responsibility": {

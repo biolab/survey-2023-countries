@@ -1,6 +1,6 @@
 const config = {
-  numberOfPairs: 8,
-  pairsPerPage: 4,
+  numberOfPairs: 50,
+  pairsPerPage: 10,
   numberOfTopResults: 3,
 
   // Set this to true, when the survey will be shared to the public
@@ -63,9 +63,13 @@ const config = {
         'zasavska',
       ],
     },
+    // {
+    //  key: 'education',
+    //  options: ['II', 'IV', 'V', 'VI/1', 'VI/2', 'VII', 'VIII/1+'],
+    // },
     {
-      key: 'education',
-      options: ['II', 'IV', 'V', 'VI/1', 'VI/2', 'VII', 'VIII/1+'],
+      key: 'grades',
+      options: ["nula", "a", "b", "c", "d", "e"],
     },
 
     // Question without options will have agreement scale from 1 - 10
