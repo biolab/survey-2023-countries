@@ -1,4 +1,8 @@
 {
+  "alreadySubmitted": {
+    "title": "Za to anketo ste že oddali odgovore.",
+    "p1": "Hvala za vaše sodelovanje."
+  },
   "verification": {
     "title": "Vnesite geslo",
     "continue": "Nadaljuj",

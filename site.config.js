@@ -5,6 +5,7 @@ const config = {
 
   // Set this to true, when the survey will be shared to the public
   writeResultsToTestFolder: true,
+  canSubmitSurveyMultipleTimes: true,
 
   countries: [
     "Nemčija",

@@ -1,11 +1,12 @@
 import Introduction from './introduction/introduction';
 import styles from '@styles/survey/Survey.module.scss';
+import contentStyles from '@styles/survey/Content.module.scss';
 import { useCallback, useContext, useMemo, useState } from 'react';
 import { CountryPair } from './utils';
 import Progress from './progress/progress';
 import Config from './config/config';
 import Navigation from './navigation/navigation';
-import { SurveyContext } from './surveyContext';
+import { SurveyContext, SURVEY_PASS_KEY } from './surveyContext';
 import Demographics from './demographics/demographics';
 import Submitted from './submitted/submitted';
 import { useTranslation } from 'next-i18next';
@@ -35,6 +36,16 @@ function Option({
   );
 }
 
+function AlreadySubmitted() {
+  const { t } = useTranslation();
+  return (
+    <div className={contentStyles.content}>
+      <h1>{t('alreadySubmitted.title')}</h1>
+      <p>{t('alreadySubmitted.p1')}</p>
+    </div>
+  );
+}
+
 function Verification() {
   const { setVerified } = useContext(SurveyContext);
   const [password, setPassword] = useState('');
@@ -52,7 +63,7 @@ function Verification() {
       return;
     }
 
-    localStorage.setItem('survey_pass', password);
+    localStorage.setItem(SURVEY_PASS_KEY, password);
 
     setError(false);
     setVerified(true);
@@ -81,9 +92,18 @@ function Verification() {
 }
 
 export default function Survey() {
-  const { pagePairs, showMetaDataPage, selectOption, submitted, verified } =
-    useContext(SurveyContext);
+  const {
+    pagePairs,
+    showMetaDataPage,
+    selectOption,
+    submitted,
+    verified,
+    alreadySubmitted,
+  } = useContext(SurveyContext);
 
+  if (alreadySubmitted) {
+    return <AlreadySubmitted />;
+  }
   if (!verified) {
     return <Verification />;
   }
