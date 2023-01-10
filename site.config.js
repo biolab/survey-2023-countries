@@ -4,7 +4,7 @@ const config = {
   numberOfTopResults: 3,
 
   // Set this to true, when the survey will be shared to the public
-  writeResultsToTestFolder: true,
+  writeResultsToTestFolder: false,
 
   countries: [
     "Nemčija",
@@ -69,7 +69,7 @@ const config = {
     // },
     {
       key: 'grades',
-      options: ["nula", "a", "b", "c", "d", "e"],
+      options: ["nula", "spomin", "a", "b", "c", "d", "e"],
     },
 
     // Question without options will have agreement scale from 1 - 10

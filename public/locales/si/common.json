@@ -65,6 +65,7 @@
       "q": "Uspeh na maturi (število doseženih točk)",
       "options": {
         "nula": "nisem opravljal mature",
+        "spomin": "se ne spomnim",
         "a": "do 15",
         "b": "od 16 do 20",
         "c": "od 21 do 25",
